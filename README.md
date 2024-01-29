@@ -1,4 +1,4 @@
 # React template
--Hacker News API
--Axios
--Emotion
+- Hacker News API
+- Axios
+- Emotion
