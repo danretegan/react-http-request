@@ -1,8 +1,6 @@
-import { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from 'react';
 import ArticleList from './ArticleList';
-
-axios.defaults.baseURL = 'https://hn.algolia.com/api/v1';
+import newsService from './service/newsService';
 
 class App extends Component {
   state = {
@@ -15,17 +13,17 @@ class App extends Component {
     try {
       this.setState({
         isLoading: true,
-        error: '', // Resetăm eroarea la fiecare cerere
+        error: '',
       });
 
-      const response = await axios.get('/search?query=react');
+      const articles = await newsService.retriveArticles();
 
       this.setState({
-        articles: response.data.hits,
+        articles,
       });
     } catch (error) {
       this.setState({
-        error: error.message, // Setăm eroarea primită de la server în starea componentei
+        error: error.message,
       });
     } finally {
       this.setState({
