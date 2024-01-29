@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ArticleList from './ArticleList';
 import newsService from './service/newsService';
+import ErrorAlert from './errorAlert/ErrorAlert';
 
 class App extends Component {
   state = {
@@ -13,7 +14,7 @@ class App extends Component {
     try {
       this.setState({
         isLoading: true,
-        error: '',
+        error: '', // Resetăm eroarea la fiecare cerere
       });
 
       const articles = await newsService.retriveArticles();
@@ -23,7 +24,7 @@ class App extends Component {
       });
     } catch (error) {
       this.setState({
-        error: error.message,
+        error: error.message, // Setăm eroarea primită de la server în starea componentei
       });
     } finally {
       this.setState({
@@ -45,7 +46,7 @@ class App extends Component {
 
     return (
       <>
-        {error?.length > 0 && <p>{error}</p>}
+        {error?.length > 0 && <ErrorAlert errors={error} />}
         {articles.length > 0 ? <ArticleList articles={articles} /> : null}
       </>
     );
