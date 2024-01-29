@@ -1,7 +1,4 @@
-# React homework template
-
-# Hacker News API
-
-# Axios
-
-# Emotion
+# React template
+-Hacker News API
+-Axios
+-Emotion
